@@ -1,8 +1,8 @@
 #' Missing Plot in Randomized Block Design(RBD)
 #' @export
 #' @param m a matrix containing values in a RBD where row of the matrix denotes the treatments and the column of the matrix denotes  block. In this matrix, we will replace the missing value with 0.
-#' @param r the index no. of row containing the missing value.
-#' @param c the index no. of column containing the missing value.
+#' @param r the index no. of row/Treatment containing the missing value.
+#' @param c the index no. of column/Block- containing the missing value.
 #' @author  Arnab Roy , Debarghya Baul.
 #' @importFrom stats aov qf
 #' @description This function analyses RBD when there is one missing observation.
@@ -28,10 +28,11 @@ Missing.RBD=function(m,r,c){
   b=ncol(m)
   v=nrow(m)
   x.hat=(b*B+v*T-G)/((b-1)*(v-1))
+  m[r,c]=x.hat
 
   y=as.vector(t(m))
 
-  y[r*c]=x.hat
+
 
   bl=as.factor(rep(1:b,times=v))
   trt=as.factor(rep(1:v,each=b))
@@ -40,8 +41,8 @@ Missing.RBD=function(m,r,c){
   SSE.x.hat=s1[3]
   x.double.hat=B/(v-1)
 
-  y1=y
-  y1[r*c]=x.double.hat
+  m[r,c]=x.double.hat
+  y1=as.vector(t(m))
 
   s2=summary(aov(y1~bl))
   s3=s2[[1]][2]$`Sum Sq`

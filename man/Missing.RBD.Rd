@@ -9,9 +9,9 @@ Missing.RBD(m, r, c)
 \arguments{
 \item{m}{a matrix containing values in a RBD where row of the matrix denotes the treatments and the column of the matrix denotes  block. In this matrix, we will replace the missing value with 0.}
 
-\item{r}{the index no. of row containing the missing value.}
+\item{r}{the index no. of row/Treatment containing the missing value.}
 
-\item{c}{the index no. of column containing the missing value.}
+\item{c}{the index no. of column/Block- containing the missing value.}
 }
 \value{
 x.hat : the least sqaure estimate of the missing observation.
